@@ -13,7 +13,7 @@ from deepeval.metrics import GEval
 from deepeval.dataset import EvaluationDataset
 
 from api_client import analyze_sentiment
-from conftest import json_schema_metric, output_correctness_metric, answer_relevancy_metric
+from conftest import json_schema_metric, output_correctness_metric
 
 
 # ---------------------------------------------------------------------------
@@ -149,7 +149,23 @@ sentiment_emotion_metric = GEval(
     threshold=0.6,
 )
 
-sentiment_relevancy_metric = answer_relevancy_metric()
+sentiment_relevancy_metric = GEval(
+    name="Sentiment Relevancy",
+    criteria=(
+        "Evaluate whether the sentiment analysis in the actual output is "
+        "relevant to the input text. A sentiment response describes the tone "
+        "and emotions of the text, not its topic, so do NOT penalize the output "
+        "for omitting the subject matter. The overallSentiment, sentimentScore, "
+        "and emotions should reflect the tone actually conveyed in the input; "
+        "for factual or logistical text, a neutral sentiment with few or no "
+        "strong emotions is relevant."
+    ),
+    evaluation_params=[
+        LLMTestCaseParams.INPUT,
+        LLMTestCaseParams.ACTUAL_OUTPUT,
+    ],
+    threshold=0.5,
+)
 
 
 # ---------------------------------------------------------------------------
