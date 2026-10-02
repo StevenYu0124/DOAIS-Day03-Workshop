@@ -42,3 +42,6 @@
   cd llm-frontend-python && python app.py
   
   ## Open http://localhost:5000 
+## CI/CD
+
+Built and tested by GitHub Actions on every push to `main`.

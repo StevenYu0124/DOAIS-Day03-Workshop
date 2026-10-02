@@ -146,3 +146,7 @@ an invented sentiment category) is rejected instead of silently accepted.
 
 `GET /api/ai/guardrails` reports which guards are active and whether each
 blocks or just logs/redacts. See `tests/test_guardrails.py` for coverage.
+
+## CI/CD
+
+Built and tested by GitHub Actions on every push to `main`.
